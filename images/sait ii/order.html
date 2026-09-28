@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа | Ароматная Чашка</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Специфичные стили для страницы заказа */
+        .order-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .order-title {
+            text-align: center;
+            color: #3e2723;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #5d4037;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #d7ccc8;
+            border-radius: 6px;
+            background-color: #fdfbf7;
+            font-size: 1rem;
+            color: #3e2723;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #5d4037;
+        }
+
+        .menu-selection {
+            background: #f5ebe0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-selection h3 {
+            margin-bottom: 1rem;
+            color: #3e2723;
+            border-bottom: 2px solid #d7ccc8;
+            padding-bottom: 0.5rem;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fff;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid #e0d0c0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-item input {
+            width: auto;
+            cursor: pointer;
+        }
+
+        /* Визуальный блок для вывода итога */
+        .total-price-block {
+            background-color: #3e2723;
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: #5d4037;
+            color: #fff;
+            border: none;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3);
+        }
+
+        .submit-btn:hover {
+            background-color: #3e2723;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #8d6e63;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="order-container">
+        <h1 class="order-title">☕ Ваш заказ на доставку</h1>
+        
+        <!-- При отправке покажет уведомление и перекинет на index.html -->
+        <form action="index1.html" onsubmit="alert('Заказ успешно оформлен! Наш менеджер свяжется с вами.');">
+            
+            <!-- Данные покупателя -->
+            <div class="form-group">
+                <label for="name">Ваше имя:</label>
+                <input type="text" id="name" required placeholder="Иван">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Номер телефона:</label>
+                <input type="tel" id="phone" required placeholder="+7 (999) 123-45-67">
+            </div>
+
+            <!-- Куда доставить -->
+            <div class="form-group">
+                <label for="address">Адрес доставки:</label>
+                <textarea id="address" rows="3" required placeholder="Город, улица, дом, квартира, подъезд"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Время доставки:</label>
+                <select id="time">
+                    <option value="fast">Как можно скорее (около 30 мин)</option>
+                    <option value="1hour">Через 1 час</option>
+                    <option value="2hours">Через 2 часа</option>
+                </select>
+            </div>
+
+            <!-- ВЫБОР ТОВАРОВ С УКАЗАНИЕМ ЦЕНЫ В data-price -->
+            <div class="menu-selection">
+                <h3>1. Выберите кофе:</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="150"> Эспрессо — 150 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="260"> Капучино XL — 260 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="240"> Флэт Уайт — 240 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="280"> Раф Ванильный — 280 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="270"> Айс Латте Карамель — 270 ₽</label>
+                </div>
+
+                <h3>2. Выберите выпечку:</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="130"> Круассан классический — 130 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="180"> Синнабон с корицей — 180 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="290"> Сэндвич на чиабатте — 290 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="150"> Французская улитка — 150 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="110"> Американский кукис — 110 ₽</label>
+                </div>
+
+                <h3>3. Выберите десерты:</h3>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="320"> Торт Прага — 320 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="290"> Чизкейк Нью-Йорк — 290 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="140"> Донат в глазури — 140 ₽</label>
+                    <label class="checkbox-item"><input type="checkbox" name="item" data-price="250"> Набор Макаронс (3 шт) — 250 ₽</label>
+                </div>
+            </div>
+
+            <!-- Блок вывода итоговой стоимости -->
+            <div class="total-price-block">
+                Итого к оплате: <span id="total-amount">0</span> ₽
+            </div>
+
+            <!-- Комментарий -->
+            <div class="form-group">
+                <label for="comment">Комментарий к заказу (необязательно):</label>
+                <textarea id="comment" rows="2" placeholder="Например: кофе без сахара"></textarea>
+            </div>
+
+            <!-- Кнопка отправки -->
+            <button type="submit" class="submit-btn">Подтвердить заказ</button>
+        </form>
+
+        <a href="index.html" class="back-link">← Вернуться на главную</a>
+    </div>
+
+    <!-- СКРИПТ ДЛЯ АВТОМАТИЧЕСКОГО ПОДСЧЕТА ИТОГА -->
+    <script>
+        // Находим все чекбоксы на странице и элемент для вывода суммы
+        const checkboxes = document.querySelectorAll('input[name="item"]');
+        const totalSpan = document.getElementById('total-amount');
+
+        // Функция, которая пробегается по чекбоксам и складывает цены выбранных
+        function calculateTotal() {
+            let total = 0;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    // Переводим цену из атрибута data-price в число и прибавляем к итогу
+                    total += parseInt(checkbox.getAttribute('data-price'));
+                }
+            });
+            // Обновляем текст суммы на экране
+            totalSpan.textContent = total;
+        }
+
+        // Следим за каждым чекбоксом: при изменении его состояния пересчитываем сумму
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', calculateTotal);
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedstart — Школа программирования</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Главный экран */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Секции */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Чему научат */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .skill-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .skill-card ul {
+            list-style-position: inside;
+            color: var(--text-muted);
+        }
+
+        .skill-card li {
+            margin-bottom: 8px;
+        }
+
+        /* Что на проекте */
+        .project-box {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        /* Преподаватели */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .teacher-card {
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .teacher-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: var(--text-muted);
+        }
+
+        .teacher-card h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .teacher-role {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .teacher-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        /* Отзывы */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: var(--surface-color);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .review-author {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .review-status {
+            font-size: 13px;
+            color: var(--primary-color);
+        }
+
+        /* Подвал */
+        footer {
+            background-color: #0b111e;
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 15px;
+            }
+            .nav-menu a {
+                font-size: 14px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .project-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигационное меню -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">WEDSTART</a>
+            <ul class="nav-menu">
+                <li><a href="#skills">Чему научим</a></li>
+                <li><a href="#project">О проекте</a></li>
+                <li><a href="#teachers">Преподаватели</a></li>
+                <li><a href="#reviews">Отзывы</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <div class="container">
+            <h1>Стань востребованным разработчиком с Wedstart</h1>
+            <p>Практическое обучение программированию с нуля под руководством практикующих менторов и создание реального проекта для портфолио.</p>
+            <a href="#skills" class="btn">Начать обучение</a>
+        </div>
+    </section>
+
+    <!-- Чему научат -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Чему вы научитесь</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Frontend-разработка</h3>
+                    <ul>
+                        <li>Вёрстка сайтов на HTML5 и CSS3</li>
+                        <li>Адаптивная графика и Flexbox/Grid</li>
+                        <li>Язык программирования JavaScript (ES6+)</li>
+                        <li>Разработка интерфейсов на React.js</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Backend-разработка</h3>
+                    <ul>
+                        <li>Создание серверной логики на Node.js</li>
+                        <li>Работа с базами данных (MongoDB, PostgreSQL)</li>
+                        <li>Проектирование и разработка REST API</li>
+                        <li>Безопасность и авторизация пользователей</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>Профессиональные навыки</h3>
+                    <ul>
+                        <li>Командная работа в Git и GitHub</li>
+                        <li>Развёртывание проектов на хостинг (Deploy)</li>
+                        <li>Методологии Scrum и Kanban</li>
+                        <li>Подготовка к техническим собеседованиям</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Что будет на проекте -->
+    <section id="project">
+        <div class="container">
+            <h2 class="section-title">Что будет на проекте</h2>
+            <div class="project-box">
+                <div class="project-info">
+                    <p>Обучение в Wedstart построено вокруг создания <strong>полноценного выпускного проекта</strong>. Это не просто учебные задачи, а реальный веб-сервис, написанный вами с нуля.</p>
+                    <p><strong>В процессе работы вы:</strong></p>
+                    <p>— Пройдёте все этапы разработки: от проектирования базы данных до запуска на живом сервере.</p>
+                    <p>— Научитесь связывать фронтенд-интерфейс с бэкенд-архитектурой.</p>
+                    <p>— Добавите в портфолио рабочий кейс, который не стыдно показать будущему работодателю.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преподаватели -->
+    <section id="teachers">
+        <div class="container">
+            <h2 class="section-title">Ваши преподаватели</h2>
+            <div class="team-grid">
+                <div class="teacher-card">
+                    <div class="teacher-avatar">👨‍💻</div>
+                    <h3>Александр Сидоров</h3>
+                    <div class="teacher-role">Senior Frontend Developer</div>
+                    <div class="teacher-desc">6 лет опыта в коммерческой разработке. Специализируется на экосистеме React/Next.js. Излагает сложные концепции простым языком.</div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-avatar">⚙️</div>
+                    <h3>Дмитрий Петров</h3>
+                    <div class="teacher-role">Lead Backend Engineer</div>
+                    <div class="teacher-desc">Эксперт по Node.js и высоконагруженным системам. Научит вас проектировать базы данных и писать отказоустойчивый серверный код.</div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-avatar">💼</div>
+                    <h3>Елена Иванова</h3>
+                    <div class="teacher-role">Team Lead / Ментор</div>
+                    <div class="teacher-desc">Руководит командами разработки. Помогает студентам выстроить процесс командного взаимодействия и готовит к прохождению интервью.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section id="reviews">
+        <div class="container">
+            <h2 class="section-title">Отзывы студентов</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-text">«До Wedstart я пробовал учиться сам, но постоянно бросал из-за каши в голове. Здесь всё разложили по полочкам. Финальный проект помог мне пройти собеседование на позицию Junior-разработчика!»</div>
+                    <div class="review-author">Илья Резнов</div>
+                    <div class="review-status">Выпускник курса Frontend</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-text">«Самый большой плюс — это менторы. На любой вопрос по коду в чате отвечали развёрнуто, объясняли ошибки на код-ревью. Проект получился сложным, но безумно интересным.»</div>
+                    <div class="review-author">Анна Ковалёва</div>
+                    <div class="review-status">Выпускница курса Fullstack</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-text">«Отличная школа! Понравилось, что не было скучной сухой теории — сразу писали код. Командная работа над бэкендом научила пользоваться Git на уровне, необходимом для реальной работы.»</div>
+                    <div class="review-author">Максим Федоров</div>
+                    <div class="review-status">Выпускник курса Backend</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Wedstart. Все права защищены. Школа программирования и веб-разработки.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
